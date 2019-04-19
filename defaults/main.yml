@@ -1,2 +1,7 @@
 ---
 # defaults file for ansible-role-vagrant
+
+# Define Vagrant version to install
+# Possible values: https://releases.hashicorp.com/vagrant/index.json
+# Default: latest
+vagrant_version: latest

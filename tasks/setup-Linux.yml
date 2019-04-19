@@ -1,0 +1,8 @@
+---
+# tasks file for install Vagrant on Linux system
+
+- name: Install Vagrant on Red Hat family system
+  yum:
+    name: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_x86_64.rpm"
+    state: present
+  when: ansible_os_family == "RedHat"

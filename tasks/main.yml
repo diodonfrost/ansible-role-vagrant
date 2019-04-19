@@ -1,2 +1,21 @@
 ---
 # tasks file for ansible-role-vagrant
+
+- name: Include OS specific variables.
+  include_vars: "{{ ansible_system }}.yml"
+
+- name: Find all Vagrant version
+  uri:
+    url: https://releases.hashicorp.com/vagrant/index.json
+    return_content: yes
+  register: packer_index
+  when: vagrant_version == 'latest'
+
+- name: Find latest Vagrant version when latest var is define
+  set_fact:
+    vagrant_version: "{{ item }}"
+  with_items: "{{ (packer_index.content | from_json).versions | list | sort | last }}"
+  when: vagrant_version == 'latest'
+
+- name: Install Vagrant on Linux
+  include_tasks: "setup-{{ ansible_system }}.yml"
