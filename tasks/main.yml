@@ -9,7 +9,6 @@
     url: https://releases.hashicorp.com/vagrant/index.json
     return_content: yes
   register: packer_index
-  when: vagrant_version == 'latest'
 
 - name: Find latest Vagrant version when latest var is define
   set_fact:
