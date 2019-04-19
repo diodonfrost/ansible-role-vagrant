@@ -1,0 +1,222 @@
+---
+services:
+  - docker
+
+env:
+#-----------------------------------------------
+#
+# CentOS
+#
+#-----------------------------------------------
+  - distribution: centos
+    version: "7"
+    playbook: vagrant-latest
+  - distribution: centos
+    version: "7"
+    playbook: vagrant-2.0.0
+  - distribution: centos
+    version: "6"
+    playbook: vagrant-latest
+  - distribution: centos
+    version: "6"
+    playbook: vagrant-2.0.0
+
+#--------------------------------
+#
+# Fedora
+#
+#--------------------------------
+  - distribution: fedora
+    version: "27"
+    playbook: vagrant-latest
+  - distribution: fedora
+    version: "27"
+    playbook: vagrant-2.0.0
+  - distribution: fedora
+    version: "26"
+    playbook: vagrant-latest
+  - distribution: fedora
+    version: "26"
+    playbook: vagrant-2.0.0
+
+#--------------------------------
+#
+# Ubuntu
+#
+#--------------------------------
+  - distribution: ubuntu
+    version: "19.04"
+    playbook: vagrant-latest
+  - distribution: ubuntu
+    version: "19.04"
+    playbook: vagrant-2.0.0
+  - distribution: ubuntu
+    version: "18.04"
+    playbook: vagrant-latest
+  - distribution: ubuntu
+    version: "18.04"
+    playbook: vagrant-2.0.0
+  - distribution: ubuntu
+    version: "16.04"
+    playbook: vagrant-latest
+  - distribution: ubuntu
+    version: "16.04"
+    playbook: vagrant-2.0.0
+  - distribution: ubuntu
+    version: "14.04"
+    playbook: vagrant-latest
+  - distribution: ubuntu
+    version: "14.04"
+    playbook: vagrant-2.0.0
+  - distribution: ubuntu
+    version: "12.04"
+    playbook: vagrant-latest
+  - distribution: ubuntu
+    version: "12.04"
+    playbook: vagrant-2.0.0
+
+#--------------------------------
+#
+# Debian
+#
+#--------------------------------
+  - distribution: debian
+    version: "9"
+    playbook: vagrant-latest
+  - distribution: debian
+    version: "9"
+    playbook: vagrant-2.0.0
+  - distribution: debian
+    version: "8"
+    playbook: vagrant-latest
+  - distribution: debian
+    version: "8"
+    playbook: vagrant-2.0.0
+
+#--------------------------------
+#
+# Oraclelinux
+#
+#--------------------------------
+  - distribution: oraclelinux
+    version: "7"
+    playbook: vagrant-latest
+  - distribution: oraclelinux
+    version: "7"
+    playbook: vagrant-2.0.0
+  - distribution: oraclelinux
+    version: "6"
+    playbook: vagrant-latest
+  - distribution: oraclelinux
+    version: "6"
+    playbook: vagrant-2.0.0
+
+#--------------------------------
+#
+# Amazonlinux
+#
+#--------------------------------
+  - distribution: amazonlinux
+    version: "2"
+    playbook: vagrant-latest
+  - distribution: amazonlinux
+    version: "2"
+    playbook: vagrant-2.0.0
+  - distribution: amazonlinux
+    version: "1"
+    playbook: vagrant-latest
+  - distribution: amazonlinux
+    version: "1"
+    playbook: vagrant-2.0.0
+
+#--------------------------------
+#
+# Opensuse
+#
+#--------------------------------
+  - distribution: opensuse
+    version: "15.1"
+    playbook: vagrant-latest
+  - distribution: opensuse
+    version: "15.1"
+    playbook: vagrant-2.0.0
+  - distribution: opensuse
+    version: "15"
+    playbook: vagrant-latest
+  - distribution: opensuse
+    version: "15"
+    playbook: vagrant-2.0.0
+  - distribution: opensuse
+    version: "42.3"
+    playbook: vagrant-latest
+  - distribution: opensuse
+    version: "42.3"
+    playbook: vagrant-2.0.0
+  - distribution: opensuse
+    version: "42.2"
+    playbook: vagrant-latest
+  - distribution: opensuse
+    version: "42.2"
+    playbook: vagrant-2.0.0
+  - distribution: opensuse
+    version: "13.2"
+    playbook: vagrant-latest
+  - distribution: opensuse
+    version: "13.2"
+    playbook: vagrant-2.0.0
+
+#--------------------------------
+#
+# Archlinux
+#
+#--------------------------------
+  - distribution: archlinux
+    version: "rolling"
+    playbook: vagrant-latest
+  - distribution: archlinux
+    version: "rolling"
+    playbook: vagrant-2.0.0
+
+#--------------------------------
+#
+# Alpine
+#
+#--------------------------------
+  - distribution: alpine
+    version: "rolling"
+    playbook: vagrant-latest
+  - distribution: alpine
+    version: "rolling"
+    playbook: vagrant-2.0.0
+
+before_install:
+  # Build docker container
+  - 'sudo docker pull diodonfrost/${distribution}-${version}-ansible:latest'
+
+script:
+  - container_id=$(mktemp)
+
+  # Run container and mount ansible role with it
+  - 'sudo docker run --detach --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro --volume="${PWD}":/etc/ansible/roles/ansible-role-vagrant:ro diodonfrost/${distribution}-${version}-ansible:latest > "${container_id}"'
+
+  # Check syntax
+  - 'sudo docker exec "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=1 ansible-playbook -v /etc/ansible/roles/ansible-role-vagrant/tests/playbooks/${playbook}.yml --syntax-check'
+
+  # Run ansible playbook
+  - 'sudo docker exec "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=1 ansible-playbook -v /etc/ansible/roles/ansible-role-vagrant/tests/playbooks/${playbook}.yml'
+
+  # Test indempotence
+  - >
+    sudo docker exec "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=1 ansible-playbook -v /etc/ansible/roles/ansible-role-vagrant/tests/playbooks/${playbook}.yml
+    | grep -q 'changed=0.*failed=0'
+    && (echo 'Idempotence test: pass' && exit 0)
+    || (echo 'Idempotence test: fail' && exit 1)
+
+  # Test role
+  - 'inspec exec tests/inspec -t docker://$(cat ${container_id})'
+
+  # Delete container
+  - 'sudo docker rm -f "$(cat ${container_id})"'
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
