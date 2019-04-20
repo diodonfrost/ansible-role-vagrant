@@ -162,30 +162,6 @@ env:
     version: "13.2"
     playbook: vagrant-2.1.0
 
-#--------------------------------
-#
-# Archlinux
-#
-#--------------------------------
-  - distribution: archlinux
-    version: "rolling"
-    playbook: vagrant-latest
-  - distribution: archlinux
-    version: "rolling"
-    playbook: vagrant-2.1.0
-
-#--------------------------------
-#
-# Alpine
-#
-#--------------------------------
-  - distribution: alpine
-    version: "rolling"
-    playbook: vagrant-latest
-  - distribution: alpine
-    version: "rolling"
-    playbook: vagrant-2.1.0
-
 before_install:
   # Build docker container
   - 'sudo docker pull diodonfrost/${distribution}-${version}-ansible:latest'

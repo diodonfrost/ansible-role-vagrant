@@ -1,3 +1,3 @@
 ---
 # vars file for Vagrant in Linux system
-vagrant_path: /usr/bin/vagrant
+vagrant_path: /usr/bin/

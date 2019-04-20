@@ -1,6 +1,18 @@
 ---
 # Install Vagrant on osx
 
+- name: Find all Vagrant version
+  uri:
+    url: https://releases.hashicorp.com/vagrant/index.json
+    return_content: yes
+  register: packer_index
+
+- name: Find latest Vagrant version when latest var is define
+  set_fact:
+    vagrant_version: "{{ item }}"
+  with_items: "{{ (packer_index.content | from_json).versions | list | sort | last }}"
+  when: vagrant_version == 'latest'
+
 - name: check if vagrant is present with the right version
   shell: vagrant --version
   register: vagrant_installed_version

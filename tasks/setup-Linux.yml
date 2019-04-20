@@ -1,6 +1,18 @@
 ---
 # tasks file for install Vagrant on Linux system
 
+- name: Find all Vagrant version
+  uri:
+    url: https://releases.hashicorp.com/vagrant/index.json
+    return_content: yes
+  register: packer_index
+
+- name: Find latest Vagrant version when latest var is define
+  set_fact:
+    vagrant_version: "{{ item }}"
+  with_items: "{{ (packer_index.content | from_json).versions | list | sort | last }}"
+  when: vagrant_version == 'latest'
+
 - name: check if vagrant is present with the right version
   shell: vagrant --version
   register: vagrant_installed_version
@@ -14,16 +26,16 @@
     state: present
   when:
     - ansible_os_family == "RedHat"
-    - vagrant_version not in vagrant_installed_version
+    - vagrant_version not in vagrant_installed_version.stdout
 
 - name: Install Vagrant on Suse family system
   zypper:
-    deb: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_x86_64.rpm"
+    name: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_x86_64.rpm"
     disable_gpg_check: yes
     state: present
   when:
     - ansible_os_family == "Suse"
-    - vagrant_version not in vagrant_installed_version
+    - vagrant_version not in vagrant_installed_version.stdout
 
 - name: Install Vagrant on Debian family system
   apt:
@@ -31,9 +43,9 @@
     state: present
   when:
     - ansible_pkg_mgr == "apt"
-    - vagrant_version not in vagrant_installed_version
+    - vagrant_version not in vagrant_installed_version.stdout
 
-- name: Install Vagrant with hashicorp bundle
+- name: Install Vagrant on Linux with hashicorp generic package
   unarchive:
     src: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_linux_amd64.zip"
     dest: "{{ vagrant_path }}"
@@ -42,4 +54,4 @@
     - ansible_os_family != "RedHat"
     - ansible_os_family != "Suse"
     - ansible_pkg_mgr != "apt"
-    - vagrant_version not in vagrant_installed_version
+    - vagrant_version not in vagrant_installed_version.stdout
