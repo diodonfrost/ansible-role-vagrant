@@ -181,8 +181,14 @@ suites:
       name: ansible_playbook
       playbook: tests/playbooks/vagrant-latest.yml
 
-  # Test vagrant-latest
-  - name: vagrant-2.0.0
+  # Test vagrant-2.1.0
+  - name: vagrant-2.1.0
     provisioner:
       name: ansible_playbook
-      playbook: tests/playbooks/vagrant-2.0.0.yml
+      playbook: tests/playbooks/vagrant-2.1.0.yml
+
+  # Test vagrant-1.8.0
+  - name: vagrant-1.8.0
+    provisioner:
+      name: ansible_playbook
+      playbook: tests/playbooks/vagrant-1.8.0.yml

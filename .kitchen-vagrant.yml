@@ -30,6 +30,7 @@ platforms:
   - name: ubuntu-17.10
   - name: ubuntu-16.04
   - name: ubuntu-14.04
+  - name: ubuntu-12.04
   - name: debian-9
   - name: debian-8
   - name: debian-7
@@ -39,6 +40,12 @@ platforms:
   - name: oraclelinux-6
     driver:
       box: bento/oracle-6
+
+  # Archlinux
+  - name: opensuse-42.1
+    driver:
+      box: opensuse/openSUSE-42.1-x86_64
+      provision: true
 
   # Archlinux
   - name: archlinux-rolling
@@ -57,6 +64,14 @@ platforms:
         - tests/vagrant/vagrant_gentoo_target.rb
 
   # Mac osx
+  - name: macosx-10.12
+    driver:
+      box: jhcook/macos-sierra
+      provision: true
+    provisioner:
+      name: ansible_playbook
+      ansible_binary_path: /usr/local/bin/
+
   - name: macosx-10.11
     driver:
       box: jhcook/osx-elcapitan-10.11
@@ -79,8 +94,14 @@ suites:
       name: ansible_playbook
       playbook: tests/playbooks/vagrant-latest.yml
 
-  # Test vagrant-latest
-  - name: vagrant-2.0.0
+  # Test vagrant-2.1.0
+  - name: vagrant-2.1.0
     provisioner:
       name: ansible_playbook
-      playbook: tests/playbooks/vagrant-2.0.0.yml
+      playbook: tests/playbooks/vagrant-2.1.0.yml
+
+  # Test vagrant-1.8.0
+  - name: vagrant-1.8.0
+    provisioner:
+      name: ansible_playbook
+      playbook: tests/playbooks/vagrant-1.8.0.yml

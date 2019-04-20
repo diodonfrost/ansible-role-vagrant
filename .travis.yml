@@ -13,13 +13,13 @@ env:
     playbook: vagrant-latest
   - distribution: centos
     version: "7"
-    playbook: vagrant-2.0.0
+    playbook: vagrant-2.1.0
   - distribution: centos
     version: "6"
     playbook: vagrant-latest
   - distribution: centos
     version: "6"
-    playbook: vagrant-2.0.0
+    playbook: vagrant-2.1.0
 
 #--------------------------------
 #
@@ -31,13 +31,13 @@ env:
     playbook: vagrant-latest
   - distribution: fedora
     version: "27"
-    playbook: vagrant-2.0.0
+    playbook: vagrant-2.1.0
   - distribution: fedora
     version: "26"
     playbook: vagrant-latest
   - distribution: fedora
     version: "26"
-    playbook: vagrant-2.0.0
+    playbook: vagrant-2.1.0
 
 #--------------------------------
 #
@@ -49,31 +49,28 @@ env:
     playbook: vagrant-latest
   - distribution: ubuntu
     version: "19.04"
-    playbook: vagrant-2.0.0
+    playbook: vagrant-2.1.0
   - distribution: ubuntu
     version: "18.04"
     playbook: vagrant-latest
   - distribution: ubuntu
     version: "18.04"
-    playbook: vagrant-2.0.0
+    playbook: vagrant-2.1.0
   - distribution: ubuntu
     version: "16.04"
     playbook: vagrant-latest
   - distribution: ubuntu
     version: "16.04"
-    playbook: vagrant-2.0.0
+    playbook: vagrant-2.1.0
   - distribution: ubuntu
     version: "14.04"
     playbook: vagrant-latest
   - distribution: ubuntu
     version: "14.04"
-    playbook: vagrant-2.0.0
+    playbook: vagrant-2.1.0
   - distribution: ubuntu
     version: "12.04"
-    playbook: vagrant-latest
-  - distribution: ubuntu
-    version: "12.04"
-    playbook: vagrant-2.0.0
+    playbook: vagrant-1.8.0
 
 #--------------------------------
 #
@@ -85,13 +82,13 @@ env:
     playbook: vagrant-latest
   - distribution: debian
     version: "9"
-    playbook: vagrant-2.0.0
+    playbook: vagrant-2.1.0
   - distribution: debian
     version: "8"
     playbook: vagrant-latest
   - distribution: debian
     version: "8"
-    playbook: vagrant-2.0.0
+    playbook: vagrant-2.1.0
 
 #--------------------------------
 #
@@ -103,13 +100,13 @@ env:
     playbook: vagrant-latest
   - distribution: oraclelinux
     version: "7"
-    playbook: vagrant-2.0.0
+    playbook: vagrant-2.1.0
   - distribution: oraclelinux
     version: "6"
     playbook: vagrant-latest
   - distribution: oraclelinux
     version: "6"
-    playbook: vagrant-2.0.0
+    playbook: vagrant-2.1.0
 
 #--------------------------------
 #
@@ -121,13 +118,13 @@ env:
     playbook: vagrant-latest
   - distribution: amazonlinux
     version: "2"
-    playbook: vagrant-2.0.0
+    playbook: vagrant-2.1.0
   - distribution: amazonlinux
     version: "1"
     playbook: vagrant-latest
   - distribution: amazonlinux
     version: "1"
-    playbook: vagrant-2.0.0
+    playbook: vagrant-2.1.0
 
 #--------------------------------
 #
@@ -139,31 +136,31 @@ env:
     playbook: vagrant-latest
   - distribution: opensuse
     version: "15.1"
-    playbook: vagrant-2.0.0
+    playbook: vagrant-2.1.0
   - distribution: opensuse
     version: "15"
     playbook: vagrant-latest
   - distribution: opensuse
     version: "15"
-    playbook: vagrant-2.0.0
+    playbook: vagrant-2.1.0
   - distribution: opensuse
     version: "42.3"
     playbook: vagrant-latest
   - distribution: opensuse
     version: "42.3"
-    playbook: vagrant-2.0.0
+    playbook: vagrant-2.1.0
   - distribution: opensuse
     version: "42.2"
     playbook: vagrant-latest
   - distribution: opensuse
     version: "42.2"
-    playbook: vagrant-2.0.0
+    playbook: vagrant-2.1.0
   - distribution: opensuse
     version: "13.2"
     playbook: vagrant-latest
   - distribution: opensuse
     version: "13.2"
-    playbook: vagrant-2.0.0
+    playbook: vagrant-2.1.0
 
 #--------------------------------
 #
@@ -175,7 +172,7 @@ env:
     playbook: vagrant-latest
   - distribution: archlinux
     version: "rolling"
-    playbook: vagrant-2.0.0
+    playbook: vagrant-2.1.0
 
 #--------------------------------
 #
@@ -187,7 +184,7 @@ env:
     playbook: vagrant-latest
   - distribution: alpine
     version: "rolling"
-    playbook: vagrant-2.0.0
+    playbook: vagrant-2.1.0
 
 before_install:
   # Build docker container
