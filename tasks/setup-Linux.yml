@@ -19,6 +19,7 @@
 - name: Install Vagrant on Suse family system
   zypper:
     deb: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_x86_64.rpm"
+    disable_gpg_check: yes
     state: present
   when:
     - ansible_os_family == "Suse"
@@ -36,6 +37,7 @@
   unarchive:
     src: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_linux_amd64.zip"
     dest: "{{ vagrant_path }}"
+    remote_src: yes
   when:
     - ansible_os_family != "RedHat"
     - ansible_os_family != "Suse"
