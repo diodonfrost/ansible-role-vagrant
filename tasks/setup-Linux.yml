@@ -9,11 +9,19 @@
   failed_when: false
 
 - name: Install Vagrant on Red Hat family system
-  yum:
+  package:
     name: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_x86_64.rpm"
     state: present
   when:
     - ansible_os_family == "RedHat"
+    - vagrant_version not in vagrant_installed_version
+
+- name: Install Vagrant on Suse family system
+  zypper:
+    deb: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_x86_64.rpm"
+    state: present
+  when:
+    - ansible_os_family == "Suse"
     - vagrant_version not in vagrant_installed_version
 
 - name: Install Vagrant on Debian family system
@@ -21,14 +29,15 @@
     deb: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_x86_64.deb"
     state: present
   when:
-    - ansible_os_family == "Debian"
+    - ansible_pkg_mgr == "apt"
     - vagrant_version not in vagrant_installed_version
 
-- name: Extract foo.tgz into /var/lib/foo
+- name: Install Vagrant with hashicorp bundle
   unarchive:
     src: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_linux_amd64.zip"
     dest: "{{ vagrant_path }}"
   when:
     - ansible_os_family != "RedHat"
-    - ansible_os_family != "Debian"
+    - ansible_os_family != "Suse"
+    - ansible_pkg_mgr != "apt"
     - vagrant_version not in vagrant_installed_version
