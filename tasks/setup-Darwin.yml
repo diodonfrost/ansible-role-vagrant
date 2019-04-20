@@ -1,0 +1,34 @@
+---
+# Install Vagrant on osx
+
+- name: check if vagrant is present with the right version
+  shell: vagrant --version
+  register: vagrant_installed_version
+  ignore_errors: yes
+  changed_when: false
+  failed_when: false
+
+- name: Install Vagrant on osx
+  block:
+
+  - name: Temporary directory
+    file:
+      path: ./tmp
+      state: directory
+
+  - name: Download Vagrant
+    get_url:
+      url: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_x86_64.dmg"
+      dest: "./tmp/vagrant_{{ vagrant_version }}_x86_64.dmg"
+
+  - name: Mount dmg
+    shell: "hdiutil attach ./tmp/vagrant_{{ vagrant_version }}_x86_64.dmg -nobrowse -mountpoint ./tmp/vagrant-{{ vagrant_version }}"
+    ignore_errors: yes
+
+  - name: Install Vagrant
+    shell: installer -pkg ./tmp/vagrant_{{ vagrant_version }}/vagrant.pkg -target /
+
+  - name: Unmount and remove temporary directory
+    shell: "hdiutil detach ./tmp/vagrant_{{ vagrant_version }}/ && rm -R ./tmp/"
+
+  when: vagrant_version not in vagrant_installed_version
