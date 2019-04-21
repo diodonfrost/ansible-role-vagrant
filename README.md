@@ -35,6 +35,7 @@ Supported platforms:
     - bionic
     - xenial
     - trusty
+    - precise
 - name: OracleLinux
   versions:
     - 7
@@ -46,16 +47,13 @@ Supported platforms:
     - 2013.09
 - name: opensuse
   versions:
-    - 15.1
-    - 15
     - 42.3
     - 42.2
     - 42.1
     - 13.2
 - name: SLES
   versions:
-    - 11
-    - 12
+    - 15
 - name: ArchLinux
   versions:
     - any
@@ -77,6 +75,7 @@ Supported platforms:
     - 2012R2
     - 2008R2
     - 8.1
+    - 10
 ```
 
 ## Role Variables

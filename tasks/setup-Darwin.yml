@@ -34,13 +34,13 @@
       dest: "./tmp/vagrant_{{ vagrant_version }}_x86_64.dmg"
 
   - name: Mount dmg
-    shell: "hdiutil attach ./tmp/vagrant_{{ vagrant_version }}_x86_64.dmg -nobrowse -mountpoint ./tmp/vagrant-{{ vagrant_version }}"
+    command: "hdiutil attach ./tmp/vagrant_{{ vagrant_version }}_x86_64.dmg -nobrowse -mountpoint ./tmp/vagrant-{{ vagrant_version }}"
     ignore_errors: yes
 
   - name: Install Vagrant
-    shell: installer -pkg ./tmp/vagrant_{{ vagrant_version }}/vagrant.pkg -target /
+    command: installer -pkg ./tmp/vagrant_{{ vagrant_version }}/vagrant.pkg -target /
 
   - name: Unmount and remove temporary directory
     shell: "hdiutil detach ./tmp/vagrant_{{ vagrant_version }}/ && rm -R ./tmp/"
 
-  when: vagrant_version not in vagrant_installed_version
+  when: vagrant_version not in vagrant_installed_version.stdout
