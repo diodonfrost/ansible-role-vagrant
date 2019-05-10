@@ -61,5 +61,8 @@ galaxy_info:
   galaxy_tags:
     - system
     - packaging
+    - build
+    - vagrant
+    - hashicorp
 
 dependencies: []
