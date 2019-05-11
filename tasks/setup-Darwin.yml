@@ -14,7 +14,7 @@
   when: vagrant_version == 'latest'
 
 - name: check if vagrant is present with the right version
-  shell: vagrant --version
+  command: vagrant --version
   register: vagrant_installed_version
   ignore_errors: yes
   changed_when: false
@@ -43,4 +43,4 @@
   - name: Unmount and remove temporary directory
     shell: "hdiutil detach ./tmp/vagrant_{{ vagrant_version }}/ && rm -R ./tmp/"
 
-  when: vagrant_version not in vagrant_installed_version.stdout
+  when: vagrant_version not in vagrant_installed_version.stdout | default('')

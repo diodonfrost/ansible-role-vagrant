@@ -14,7 +14,7 @@
   when: vagrant_version == 'latest'
 
 - name: check if vagrant is present with the right version
-  shell: vagrant --version
+  command: vagrant --version
   register: vagrant_installed_version
   ignore_errors: yes
   changed_when: false
@@ -26,7 +26,7 @@
     state: present
   when:
     - ansible_os_family == "RedHat"
-    - vagrant_version not in vagrant_installed_version.stdout
+    - vagrant_version not in vagrant_installed_version.stdout | default('')
 
 - name: Install Vagrant on Suse family system
   zypper:
@@ -35,7 +35,7 @@
     state: present
   when:
     - ansible_os_family == "Suse"
-    - vagrant_version not in vagrant_installed_version.stdout
+    - vagrant_version not in vagrant_installed_version.stdout | default('')
 
 - name: Install Vagrant on Debian family system
   apt:
@@ -43,7 +43,7 @@
     state: present
   when:
     - ansible_pkg_mgr == "apt"
-    - vagrant_version not in vagrant_installed_version.stdout
+    - vagrant_version not in vagrant_installed_version.stdout | default('')
 
 - name: Install Vagrant on Linux with hashicorp generic package
   unarchive:
@@ -54,4 +54,4 @@
     - ansible_os_family != "RedHat"
     - ansible_os_family != "Suse"
     - ansible_pkg_mgr != "apt"
-    - vagrant_version not in vagrant_installed_version.stdout
+    - vagrant_version not in vagrant_installed_version.stdout | default('')
