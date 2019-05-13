@@ -47,6 +47,12 @@ galaxy_info:
     - name: Alpine
       versions:
         - any
+    - name: Gentoo
+      versions:
+        - any
+    - name: ClearLinux
+      versions:
+        - any
     - name: MacOSX
       versions:
         - 10.11
