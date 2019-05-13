@@ -2,6 +2,6 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - ansible-role-vagrant
-  vars:
-    vagrant_version: 1.8.0
+    - role: ansible-role-vagrant
+      vars:
+        vagrant_version: 1.8.0
