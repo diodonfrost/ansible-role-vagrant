@@ -1,26 +1,27 @@
 ---
 # tasks file for install Vagrant on Linux system
 
-- name: Find all Vagrant version
+- name: Linux | Find all versions of Vagrant
   uri:
     url: https://releases.hashicorp.com/vagrant/index.json
     return_content: yes
   register: vagrant_index
 
-- name: Find latest Vagrant version when latest var is define
+- name: Linux | Finds the latest version of Vagrant when latest var is define
   set_fact:
     vagrant_version: "{{ item }}"
   with_items: "{{ (vagrant_index.content | from_json).versions | list | sort | last }}"
   when: vagrant_version == 'latest'
 
-- name: check if vagrant is present with the right version
+# This task avoids downloading Vagrant every time
+- name: Linux | Check if Vagrant is present with the right version
   command: vagrant --version
   register: vagrant_installed_version
   ignore_errors: yes
   changed_when: false
   failed_when: false
 
-- name: Install Vagrant on Red Hat family system
+- name: RedHat | Install Vagrant
   package:
     name: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_x86_64.rpm"
     state: present
@@ -28,7 +29,7 @@
     - ansible_os_family == "RedHat"
     - vagrant_version not in vagrant_installed_version.stdout | default('')
 
-- name: Install Vagrant on Suse family system
+- name: Suse | Install Vagrant
   zypper:
     name: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_x86_64.rpm"
     disable_gpg_check: yes
@@ -37,7 +38,7 @@
     - ansible_os_family == "Suse"
     - vagrant_version not in vagrant_installed_version.stdout | default('')
 
-- name: Install Vagrant on Debian family system
+- name: Debian | Install Vagrant
   apt:
     deb: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_x86_64.deb"
     state: present
@@ -45,7 +46,7 @@
     - ansible_pkg_mgr == "apt"
     - vagrant_version not in vagrant_installed_version.stdout | default('')
 
-- name: Install Vagrant on Linux with hashicorp generic package
+- name: Linux | Install Vagrant with Hashicorp generic package
   unarchive:
     src: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_linux_amd64.zip"
     dest: "{{ vagrant_path }}"

@@ -1,19 +1,19 @@
 ---
 # tasks file for install Vagrant on Windows system
 
-- name: Find all Vagrant version
+- name: Windows | Find all versions of Vagrant
   win_uri:
     url: https://releases.hashicorp.com/vagrant/index.json
     return_content: yes
   register: vagrant_index
 
-- name: Find latest Vagrant version when latest var is define
+- name: Windows | Finds the latest version of Vagrant when latest var is define
   set_fact:
     vagrant_version: "{{ item }}"
   with_items: "{{ (vagrant_index.content | from_json).versions | list | sort | last }}"
   when: vagrant_version == 'latest'
 
-- name: Install vagrant on Windows
+- name: Windows | Install vagrant
   win_package:
     path: https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_x86_64.msi
     product_id: Vagrant

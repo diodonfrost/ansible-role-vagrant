@@ -1,46 +1,47 @@
 ---
 # Install Vagrant on osx
 
-- name: Find all Vagrant version
+- name: Darwin | Find all versions of Vagrant
   uri:
     url: https://releases.hashicorp.com/vagrant/index.json
     return_content: yes
   register: vagrant_index
 
-- name: Find latest Vagrant version when latest var is define
+- name: Darwin | Finds the latest Vagrant version when latest var is define
   set_fact:
     vagrant_version: "{{ item }}"
   with_items: "{{ (vagrant_index.content | from_json).versions | list | sort | last }}"
   when: vagrant_version == 'latest'
 
-- name: check if vagrant is present with the right version
+# This task avoids downloading Vagrant every time
+- name: Darwin | check if vagrant is present with the right version
   command: vagrant --version
   register: vagrant_installed_version
   ignore_errors: yes
   changed_when: false
   failed_when: false
 
-- name: Install Vagrant on osx
+- name: Darwin | Install Vagrant
   block:
 
-  - name: Temporary directory
+  - name: Darwin | Temporary directory
     file:
       path: ./tmp
       state: directory
 
-  - name: Download Vagrant
+  - name: Darwin | Download Vagrant
     get_url:
       url: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_x86_64.dmg"
       dest: "./tmp/vagrant_{{ vagrant_version }}_x86_64.dmg"
 
-  - name: Mount dmg
+  - name: Darwin | Mount dmg
     command: "hdiutil attach ./tmp/vagrant_{{ vagrant_version }}_x86_64.dmg -nobrowse -mountpoint ./tmp/vagrant-{{ vagrant_version }}"
     ignore_errors: yes
 
-  - name: Install Vagrant
+  - name: Darwin | Install Vagrant
     command: installer -pkg ./tmp/vagrant_{{ vagrant_version }}/vagrant.pkg -target /
 
-  - name: Unmount and remove temporary directory
+  - name: Darwin | Unmount and remove temporary directory
     shell: "hdiutil detach ./tmp/vagrant_{{ vagrant_version }}/ && rm -R ./tmp/"
 
   when: vagrant_version not in vagrant_installed_version.stdout | default('')
