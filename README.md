@@ -112,7 +112,7 @@ This is a sample playbook file for deploying the Ansible Galaxy vagrant role in 
 
 The preferred way of locally testing the role is to use Docker. You will have to install Docker on your system.
 
-You can also use vagrant and Virtualbox with vagrant to run tests locally. You will have to install Virtualbox and Vagrant on your system. For all our tests we use test-kitchen.
+You can also use Virtualbox with kitchen-vagrant to run tests locally. You will have to install Virtualbox and Vagrant on your system. For all our tests we use test-kitchen.
 
 Next install test-kitchen:
 
@@ -156,7 +156,7 @@ kitchen test vagrant-latest-centos-7
 
 ### Testing on Windows with Virtualbox
 
-Windows can only be test with Virtualbox provider,do not use 'kitchen test' command for testing Windows environment. There 4 steps you will be using with test-kitchen as part of your workflow.
+Windows can only be test with Virtualbox provider, do not use 'kitchen test' command for testing Windows environment. There 4 steps you will be using with test-kitchen as part of your workflow.
 
 First of all we must set the kitchen file:
 ```shell
