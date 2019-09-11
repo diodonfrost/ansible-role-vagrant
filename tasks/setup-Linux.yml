@@ -26,6 +26,15 @@
   changed_when: false
   failed_when: false
 
+- name: yum | Install Vagrant
+  yum:
+    name: "https://releases.hashicorp.com/vagrant/{{ vagrant_version_to_install }}/vagrant_{{ vagrant_version_to_install }}_x86_64.rpm"
+    allow_downgrade: yes
+    state: present
+  when:
+    - ansible_pkg_mgr == "yum"
+    - vagrant_version_to_install not in vagrant_installed_version.stdout | default('')
+
 - name: dnf | Install Vagrant
   dnf:
     name: "https://releases.hashicorp.com/vagrant/{{ vagrant_version_to_install }}/vagrant_{{ vagrant_version_to_install }}_x86_64.rpm"
@@ -34,24 +43,18 @@
     - ansible_pkg_mgr == "dnf"
     - vagrant_version_to_install not in vagrant_installed_version.stdout | default('')
 
-- name: yum | Install Vagrant
-  yum:
-    name: "https://releases.hashicorp.com/vagrant/{{ vagrant_version_to_install }}/vagrant_{{ vagrant_version_to_install }}_x86_64.rpm"
-    state: present
-  when:
-    - ansible_pkg_mgr == "yum"
-    - ansible_pkg_mgr != "dnf"
-    - vagrant_version_to_install not in vagrant_installed_version.stdout | default('')
-
 - name: zypper | Install Vagrant
   zypper:
     name: "https://releases.hashicorp.com/vagrant/{{ vagrant_version_to_install }}/vagrant_{{ vagrant_version_to_install }}_x86_64.rpm"
     disable_gpg_check: yes
+    force: yes
     state: present
   when:
     - ansible_pkg_mgr == "zypper"
     - vagrant_version_to_install not in vagrant_installed_version.stdout | default('')
 
+# Downgrade vagrant package cannot be performed because ansible module apt
+# do not support package downgrade safely https://github.com/ansible/ansible/pull/33677
 - name: apt | Install Vagrant
   apt:
     deb: "https://releases.hashicorp.com/vagrant/{{ vagrant_version_to_install }}/vagrant_{{ vagrant_version_to_install }}_x86_64.deb"
