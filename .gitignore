@@ -1,3 +1,4 @@
 .kitchen
 tests/inspec/inspec.lock
 Dockerfile-kitchen*
+Gemfile.lock
