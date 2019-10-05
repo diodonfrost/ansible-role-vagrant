@@ -9,6 +9,12 @@ env:
 #
 #-----------------------------------------------
   - distribution: centos
+    version: "8"
+    playbook: vagrant-latest
+  - distribution: centos
+    version: "8"
+    playbook: vagrant-2.1.0
+  - distribution: centos
     version: "7"
     playbook: vagrant-latest
   - distribution: centos
