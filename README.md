@@ -26,6 +26,7 @@ Supported platforms:
     - 26
 - name: Debian
   versions:
+    - buster
     - stretch
     - jessie
     - wheezy

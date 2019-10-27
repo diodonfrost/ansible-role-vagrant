@@ -84,6 +84,12 @@ env:
 #
 #--------------------------------
   - distribution: debian
+    version: "10"
+    playbook: vagrant-latest
+  - distribution: debian
+    version: "10"
+    playbook: vagrant-2.1.0
+  - distribution: debian
     version: "9"
     playbook: vagrant-latest
   - distribution: debian
