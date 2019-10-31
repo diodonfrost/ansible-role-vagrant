@@ -21,6 +21,13 @@ verifier:
 
 platforms:
   # Centos
+  - name: centos-8
+    driver:
+      image: diodonfrost/centos-8-ansible
+      run_command: /sbin/init
+      platform: centos
+      provision_command:
+        - sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
   - name: centos-7
     driver:
       image: diodonfrost/centos-7-ansible
