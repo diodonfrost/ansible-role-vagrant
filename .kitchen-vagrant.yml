@@ -21,6 +21,7 @@ verifier:
 # Build platforms
 platforms:
   # Standard Linux
+  - name: centos-8
   - name: centos-7
   - name: centos-6
   - name: fedora-28
