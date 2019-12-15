@@ -8,23 +8,17 @@ env:
 # CentOS
 #
 #-----------------------------------------------
-  - distribution: centos
-    version: "8"
+  - distribution: centos-8
     playbook: vagrant-latest
-  - distribution: centos
-    version: "8"
+  - distribution: centos-8
     playbook: vagrant-2.1.0
-  - distribution: centos
-    version: "7"
+  - distribution: centos-7
     playbook: vagrant-latest
-  - distribution: centos
-    version: "7"
+  - distribution: centos-7
     playbook: vagrant-2.1.0
-  - distribution: centos
-    version: "6"
+  - distribution: centos-6
     playbook: vagrant-latest
-  - distribution: centos
-    version: "6"
+  - distribution: centos-6
     playbook: vagrant-2.1.0
 
 #--------------------------------
@@ -32,17 +26,33 @@ env:
 # Fedora
 #
 #--------------------------------
-  - distribution: fedora
-    version: "27"
+  - distribution: fedora-32
     playbook: vagrant-latest
-  - distribution: fedora
-    version: "27"
+  - distribution: fedora-32
     playbook: vagrant-2.1.0
-  - distribution: fedora
-    version: "26"
+  - distribution: fedora-31
     playbook: vagrant-latest
-  - distribution: fedora
-    version: "26"
+  - distribution: fedora-31
+    playbook: vagrant-2.1.0
+  - distribution: fedora-30
+    playbook: vagrant-latest
+  - distribution: fedora-30
+    playbook: vagrant-2.1.0
+  - distribution: fedora-29
+    playbook: vagrant-latest
+  - distribution: fedora-29
+    playbook: vagrant-2.1.0
+  - distribution: fedora-28
+    playbook: vagrant-latest
+  - distribution: fedora-28
+    playbook: vagrant-2.1.0
+  - distribution: fedora-27
+    playbook: vagrant-latest
+  - distribution: fedora-27
+    playbook: vagrant-2.1.0
+  - distribution: fedora-26
+    playbook: vagrant-latest
+  - distribution: fedora-26
     playbook: vagrant-2.1.0
 
 #--------------------------------
@@ -50,32 +60,23 @@ env:
 # Ubuntu
 #
 #--------------------------------
-  - distribution: ubuntu
-    version: "19.04"
+  - distribution: ubuntu-19.04
     playbook: vagrant-latest
-  - distribution: ubuntu
-    version: "19.04"
+  - distribution: ubuntu-19.04
     playbook: vagrant-2.1.0
-  - distribution: ubuntu
-    version: "18.04"
+  - distribution: ubuntu-18.04
     playbook: vagrant-latest
-  - distribution: ubuntu
-    version: "18.04"
+  - distribution: ubuntu-18.04
     playbook: vagrant-2.1.0
-  - distribution: ubuntu
-    version: "16.04"
+  - distribution: ubuntu-16.04
     playbook: vagrant-latest
-  - distribution: ubuntu
-    version: "16.04"
+  - distribution: ubuntu-16.04
     playbook: vagrant-2.1.0
-  - distribution: ubuntu
-    version: "14.04"
+  - distribution: ubuntu-14.04
     playbook: vagrant-latest
-  - distribution: ubuntu
-    version: "14.04"
+  - distribution: ubuntu-14.04
     playbook: vagrant-2.1.0
-  - distribution: ubuntu
-    version: "12.04"
+  - distribution: ubuntu-12.04
     playbook: vagrant-1.8.0
 
 #--------------------------------
@@ -83,23 +84,17 @@ env:
 # Debian
 #
 #--------------------------------
-  - distribution: debian
-    version: "10"
+  - distribution: debian-10
     playbook: vagrant-latest
-  - distribution: debian
-    version: "10"
+  - distribution: debian-10
     playbook: vagrant-2.1.0
-  - distribution: debian
-    version: "9"
+  - distribution: debian-9
     playbook: vagrant-latest
-  - distribution: debian
-    version: "9"
+  - distribution: debian-9
     playbook: vagrant-2.1.0
-  - distribution: debian
-    version: "8"
+  - distribution: debian-8
     playbook: vagrant-latest
-  - distribution: debian
-    version: "8"
+  - distribution: debian-8
     playbook: vagrant-2.1.0
 
 #--------------------------------
@@ -107,17 +102,17 @@ env:
 # Oraclelinux
 #
 #--------------------------------
-  - distribution: oraclelinux
-    version: "7"
+  - distribution: oraclelinux-8
     playbook: vagrant-latest
-  - distribution: oraclelinux
-    version: "7"
+  - distribution: oraclelinux-8
     playbook: vagrant-2.1.0
-  - distribution: oraclelinux
-    version: "6"
+  - distribution: oraclelinux-7
     playbook: vagrant-latest
-  - distribution: oraclelinux
-    version: "6"
+  - distribution: oraclelinux-7
+    playbook: vagrant-2.1.0
+  - distribution: oraclelinux-6
+    playbook: vagrant-latest
+  - distribution: oraclelinux-6
     playbook: vagrant-2.1.0
 
 #--------------------------------
@@ -125,17 +120,13 @@ env:
 # Amazonlinux
 #
 #--------------------------------
-  - distribution: amazonlinux
-    version: "2"
+  - distribution: amazonlinux-2
     playbook: vagrant-latest
-  - distribution: amazonlinux
-    version: "2"
+  - distribution: amazonlinux-2
     playbook: vagrant-2.1.0
-  - distribution: amazonlinux
-    version: "1"
+  - distribution: amazonlinux-1
     playbook: vagrant-latest
-  - distribution: amazonlinux
-    version: "1"
+  - distribution: amazonlinux-1
     playbook: vagrant-2.1.0
 
 #--------------------------------
@@ -143,46 +134,36 @@ env:
 # Opensuse
 #
 #--------------------------------
-  - distribution: opensuse
-    version: "15.1"
+  - distribution: opensuse-15.1
     playbook: vagrant-latest
-  - distribution: opensuse
-    version: "15.1"
+  - distribution: opensuse-15.1
     playbook: vagrant-2.1.0
-  - distribution: opensuse
-    version: "15"
+  - distribution: opensuse-15
     playbook: vagrant-latest
-  - distribution: opensuse
-    version: "15"
+  - distribution: opensuse-15
     playbook: vagrant-2.1.0
-  - distribution: opensuse
-    version: "42.3"
+  - distribution: opensuse-42.3
     playbook: vagrant-latest
-  - distribution: opensuse
-    version: "42.3"
+  - distribution: opensuse-42.3
     playbook: vagrant-2.1.0
-  - distribution: opensuse
-    version: "42.2"
+  - distribution: opensuse-42.2
     playbook: vagrant-latest
-  - distribution: opensuse
-    version: "42.2"
+  - distribution: opensuse-42.2
     playbook: vagrant-2.1.0
-  - distribution: opensuse
-    version: "13.2"
+  - distribution: opensuse-13.2
     playbook: vagrant-latest
-  - distribution: opensuse
-    version: "13.2"
+  - distribution: opensuse-13.2
     playbook: vagrant-2.1.0
 
 before_install:
   # Build docker container
-  - 'sudo docker pull diodonfrost/${distribution}-${version}-ansible:latest'
+  - 'sudo docker pull diodonfrost/${distribution}-ansible:latest'
 
 script:
   - container_id=$(mktemp)
 
   # Run container and mount ansible role with it
-  - 'sudo docker run --detach --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro --volume="${PWD}":/etc/ansible/roles/ansible-role-vagrant:ro diodonfrost/${distribution}-${version}-ansible:latest > "${container_id}"'
+  - 'sudo docker run --detach --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro --volume="${PWD}":/etc/ansible/roles/ansible-role-vagrant:ro diodonfrost/${distribution}-ansible:latest > "${container_id}"'
 
   # Check syntax
   - 'sudo docker exec "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=1 ansible-playbook -v /etc/ansible/roles/ansible-role-vagrant/tests/playbooks/${playbook}.yml --syntax-check'
