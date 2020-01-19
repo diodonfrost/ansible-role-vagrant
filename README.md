@@ -1,6 +1,6 @@
 # ansible-role-vagrant
 
-[![Build Status](https://travis-ci.org/diodonfrost/ansible-role-vagrant.svg?branch=master)](https://travis-ci.org/diodonfrost/ansible-role-vagrant)
+[![Build Status](https://travis-ci.com/diodonfrost/ansible-role-vagrant.svg?branch=master)](https://travis-ci.com/diodonfrost/ansible-role-vagrant)
 [![Ansible Galaxy](https://img.shields.io/badge/galaxy-diodonfrost.vagrant-660198.svg)](https://galaxy.ansible.com/diodonfrost/vagrant)
 
 This role provide a compliance for install vagrant on your target host.

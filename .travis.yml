@@ -146,10 +146,6 @@ env:
     playbook: vagrant-latest
   - distribution: opensuse-42.3
     playbook: vagrant-2.1.0
-  - distribution: opensuse-42.2
-    playbook: vagrant-latest
-  - distribution: opensuse-42.2
-    playbook: vagrant-2.1.0
   - distribution: opensuse-13.2
     playbook: vagrant-latest
   - distribution: opensuse-13.2
