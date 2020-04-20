@@ -60,10 +60,6 @@ env:
 # Ubuntu
 #
 #--------------------------------
-  - distribution: ubuntu-19.04
-    playbook: vagrant-latest
-  - distribution: ubuntu-19.04
-    playbook: vagrant-2.1.0
   - distribution: ubuntu-18.04
     playbook: vagrant-latest
   - distribution: ubuntu-18.04

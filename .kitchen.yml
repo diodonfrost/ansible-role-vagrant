@@ -71,10 +71,6 @@ platforms:
     driver:
       image: diodonfrost/ubuntu-20.04-ansible
       platform: ubuntu
-  - name: ubuntu-19.04
-    driver:
-      image: diodonfrost/ubuntu-19.04-ansible
-      platform: ubuntu
   - name: ubuntu-18.04
     driver:
       image: diodonfrost/ubuntu-18.04-ansible
