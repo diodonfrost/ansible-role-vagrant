@@ -6,6 +6,7 @@
     url: https://releases.hashicorp.com/vagrant/index.json
     return_content: yes
   register: vagrant_index
+  when: vagrant_version == 'latest'
 
 - name: Linux | Finds the latest version of Vagrant when latest var is define
   set_fact:
