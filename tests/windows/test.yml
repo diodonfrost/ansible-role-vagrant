@@ -1,5 +1,0 @@
----
-- name: ansible-role-vagrant
-  hosts: windows-machines
-  roles:
-    - ansible-role-vagrant
