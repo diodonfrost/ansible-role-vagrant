@@ -1,0 +1,13 @@
+---
+- name: Verify
+  hosts: all
+  tasks:
+    - name: Linux | Vagrant should be functionnal
+      command: vagrant --version
+      register: vagrant_result
+
+    - name: Linux | Verify commands outputs
+      assert:
+        that:
+          - vagrant_result.rc == 0
+        success_msg: "All tests passed"

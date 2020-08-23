@@ -1,0 +1,16 @@
+---
+driver:
+  name: docker
+platforms:
+  - name: linux
+    image: diodonfrost/${distribution:-centos-8}-ansible:latest
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: yes
+    pre_build_image: yes
+    env:
+      vagrant_version: "${vagrant_version:-latest}"
+provisioner:
+  name: ansible
+verifier:
+  name: ansible

@@ -1,0 +1,9 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include ansible-role-vagrant"
+      include_role:
+        name: "ansible-role-vagrant"
+      vars:
+        vagrant_version: "{{ ansible_env.vagrant_version | default('latest') }}"
