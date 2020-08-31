@@ -9,22 +9,8 @@
   when: vagrant_version == 'latest'
 
 - name: Linux | Finds the latest version of Vagrant when latest var is define
-  shell:
-    cmd: |
-      set -${-//[sc]/}eu${DEBUG+xv}o pipefail
-      IFS=" " read -r -a arrayzz
-      IFS=$'\n' sorted=($( sort -t '.' -k1,1nr -k2,2nr -k3,3nr <<<"${arrayzz[*]}" ))
-      printf '%s' "${sorted[0]}"
-  args:
-    stdin: '{{ (vagrant_index.content | from_json).versions | list | join(" ") }}'
-    executable: /bin/bash
-  register: shell_output
-  changed_when: False
-  when: vagrant_version == 'latest'
-
-- name: Linux | Use the specified Vagrant version from the previous command's register
   set_fact:
-    vagrant_version_to_install: '{{ shell_output.stdout }}'
+    vagrant_version_to_install: "{{ (vagrant_index.content | from_json).versions | list | sort_versions | last }}"
   when: vagrant_version == 'latest'
 
 - name: Linux | Use the specified Vagrant version when latest var is not define
