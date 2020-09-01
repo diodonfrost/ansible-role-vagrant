@@ -10,8 +10,7 @@
 
 - name: Linux | Finds the latest version of Vagrant when latest var is define
   set_fact:
-    vagrant_version_to_install: "{{ item }}"
-  with_items: "{{ (vagrant_index.content | from_json).versions | list | sort | last }}"
+    vagrant_version_to_install: "{{ (vagrant_index.content | from_json).versions | list | sort_versions | last }}"
   when: vagrant_version == 'latest'
 
 - name: Linux | Use the specified Vagrant version when latest var is not define
