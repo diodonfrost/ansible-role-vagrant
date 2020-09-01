@@ -67,6 +67,7 @@
   unarchive:
     src: "https://releases.hashicorp.com/vagrant/{{ vagrant_version_to_install }}/vagrant_{{ vagrant_version_to_install }}_linux_amd64.zip"
     dest: "{{ vagrant_path }}"
+    mode: '0755'
     remote_src: yes
   when:
     - ansible_pkg_mgr != "dnf"

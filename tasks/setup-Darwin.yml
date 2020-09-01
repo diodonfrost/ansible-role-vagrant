@@ -32,6 +32,7 @@
   - name: Darwin | Temporary directory
     file:
       path: ./tmp
+      mode: '0755'
       state: directory
 
   - name: Darwin | Download Vagrant
