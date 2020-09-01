@@ -1,6 +1,10 @@
 ---
 driver:
   name: docker
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
 platforms:
   - name: linux
     image: diodonfrost/${distribution:-centos-8}-ansible:latest

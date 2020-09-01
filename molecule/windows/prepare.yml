@@ -2,4 +2,5 @@
 - name: Prepare
   hosts: all
   tasks:
-    - win_shell: echo "nothing to do"
+    - name: nothing to do
+      win_shell: echo "nothing to do"
