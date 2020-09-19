@@ -35,10 +35,8 @@ jobs:
           - oraclelinux-6
           - amazonlinux-2
           - amazonlinux-1
-          - opensuse-15.1
-          - opensuse-15
-          - opensuse-42.3
-          - opensuse-13.2
+          - opensuse-leap
+          - opensuse-tumbleweed
         vagrant_version:
           - latest
           - 2.1.0

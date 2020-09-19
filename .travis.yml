@@ -135,21 +135,13 @@ env:
 # Opensuse
 #
 #--------------------------------
-  - distribution: opensuse-15.1
+  - distribution: opensuse-leap
     vagrant_version: latest
-  - distribution: opensuse-15.1
+  - distribution: opensuse-leap
     vagrant_version: 2.1.0
-  - distribution: opensuse-15
+  - distribution: opensuse-tumbleweed
     vagrant_version: latest
-  - distribution: opensuse-15
-    vagrant_version: 2.1.0
-  - distribution: opensuse-42.3
-    vagrant_version: latest
-  - distribution: opensuse-42.3
-    vagrant_version: 2.1.0
-  - distribution: opensuse-13.2
-    vagrant_version: latest
-  - distribution: opensuse-13.2
+  - distribution: opensuse-tumbleweed
     vagrant_version: 2.1.0
 
 before_install:
