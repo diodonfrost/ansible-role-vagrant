@@ -5,3 +5,5 @@
     - name: "Include ansible-role-vagrant"
       include_role:
         name: "ansible-role-vagrant"
+      vars:
+        vagrant_version: "{{ lookup('env', 'vagrant_version') | default('latest', true) }}"
