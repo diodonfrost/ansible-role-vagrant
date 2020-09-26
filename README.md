@@ -50,7 +50,11 @@ Supported platforms:
     - 2013.09
 - name: opensuse
   versions:
-    - any
+    - 15.2
+    - 15.1
+    - 15.0
+    - 42.2
+    - 42.1
 - name: ArchLinux
   versions:
     - any
