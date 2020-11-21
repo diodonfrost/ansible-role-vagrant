@@ -7,7 +7,7 @@ lint: |
   ansible-lint
 platforms:
   - name: linux
-    image: diodonfrost/${distribution:-centos-8}-ansible:latest
+    image: diodonfrost/${image:-ansible-centos:8}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: yes
