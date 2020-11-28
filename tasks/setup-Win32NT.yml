@@ -6,6 +6,7 @@
     url: https://releases.hashicorp.com/vagrant/index.json
     return_content: yes
   register: vagrant_index
+  check_mode: no
   when: vagrant_version == 'latest'
 
 - name: Windows | Finds the latest version of Vagrant when latest var is define
