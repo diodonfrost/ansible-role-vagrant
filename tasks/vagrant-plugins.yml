@@ -1,0 +1,29 @@
+---
+# This installs a plugin with the given name or file path.
+# If the name is not a path to a file, then the plugin is installed
+# from remote repositories, usually RubyGems. 
+
+- name: Linux | Install Vagrant plugins
+  command: vagrant plugin install {{ item }}
+  args:
+    creates: ~/.vagrant.d/gems/*/gems/{{ item }}*/
+  with_items: "{{ vagrant_plugins }}"
+  when: ansible_system == "Linux"
+
+# win_command "creates" option doesn't support "*" filter
+# Uses instead "vagrant plugin list" to check if the defined plugin is present.
+- name: Windows | List vagrant plugins
+  win_command: vagrant plugin list
+  ignore_errors: yes
+  changed_when: false
+  failed_when: false
+  register: vagrant_plugin_result
+  when: ansible_system == "Win32NT"
+  check_mode: no
+
+- name: Windows | Install Vagrant plugins
+  win_command: vagrant plugin install {{ item }}
+  with_items: "{{ vagrant_plugins }}"
+  when:
+    - ansible_system == "Win32NT"
+    - item not in vagrant_plugin_result.stdout

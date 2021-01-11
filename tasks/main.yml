@@ -6,3 +6,7 @@
 
 - name: Install Vagrant
   include_tasks: "setup-{{ ansible_system }}.yml"
+
+- name: Install Vagrant plugins
+  include_tasks: "vagrant-plugins.yml"
+  when: vagrant_plugins | length > 0

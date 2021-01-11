@@ -90,6 +90,9 @@ This role has multiple variables. The defaults for all these variables are the f
 # Possible values: https://releases.hashicorp.com/vagrant/index.json
 # Default: latest
 vagrant_version: latest
+
+# Define Vagrant plguins to install
+vagrant_plugins: []
 ```
 
 ## Dependencies
