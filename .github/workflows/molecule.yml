@@ -31,7 +31,6 @@ jobs:
           - debian:8
           - oraclelinux:8
           - oraclelinux:7
-          - oraclelinux:6
           - amazonlinux:2
           - amazonlinux:1
           - opensuse:leap
