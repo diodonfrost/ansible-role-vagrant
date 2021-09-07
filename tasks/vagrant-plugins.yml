@@ -1,7 +1,7 @@
 ---
 # This installs a plugin with the given name or file path.
 # If the name is not a path to a file, then the plugin is installed
-# from remote repositories, usually RubyGems. 
+# from remote repositories, usually RubyGems.
 
 - name: Linux | Install Vagrant plugins
   command: vagrant plugin install {{ item }}
