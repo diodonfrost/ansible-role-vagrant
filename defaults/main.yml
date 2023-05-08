@@ -6,5 +6,5 @@
 # Default: latest
 vagrant_version: latest
 
-# Define Vagrant plguins to install
-vagrant_plugins: []
+# Install Vagrant from binary
+vagrant_binary_install: false

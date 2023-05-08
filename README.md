@@ -16,6 +16,7 @@ This role has multiple variables. The defaults for all these variables are the f
 
 ```yaml
 ---
+---
 # defaults file for ansible-role-vagrant
 
 # Define Vagrant version to install
@@ -23,8 +24,8 @@ This role has multiple variables. The defaults for all these variables are the f
 # Default: latest
 vagrant_version: latest
 
-# Define Vagrant plguins to install
-vagrant_plugins: []
+# Install Vagrant from binary
+vagrant_binary_install: false
 ```
 
 ## Dependencies
