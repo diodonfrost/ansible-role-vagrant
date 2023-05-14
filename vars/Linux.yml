@@ -1,3 +1,20 @@
 ---
 # vars file for Vagrant in Linux system
 vagrant_path: /usr/bin/
+
+pkg_fuse:
+  Alpine:
+    - fuse
+  Archlinux:
+    - fuse2
+  Debian: 
+    - fuse
+    - libfuse2
+  Gentoo:
+    - sys-fs/fuse
+  RedHat:
+    - fuse
+    - fuse-libs
+  Suse:
+    - fuse
+    - libfuse2

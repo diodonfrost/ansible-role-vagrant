@@ -1,5 +1,11 @@
 ---
 # tasks file for install Vagrant on Linux system
+- name: Linux | Install Fuse
+  package:
+    name: "{{ pkg_fuse[ansible_facts['os_family']] }}"
+    state: present
+  when: ansible_facts['os_family'] in pkg_fuse
+
 - name: Linux | Find all versions of Vagrant
   uri:
     url: https://releases.hashicorp.com/vagrant/index.json
