@@ -58,7 +58,7 @@ To develop or test you'll need to have installed the following:
 * [Python](https://www.python.org/) (including python-pip)
 * [Ansible](https://www.ansible.com/)
 * [Molecule](http://molecule.readthedocs.io/)
-* [Libvirt](https://www.virtualbox.org/) (windows tests only)
+* [Libvirt](https://libvirt.org/) (windows tests only)
 * [Vagrant](https://www.vagrantup.com/downloads.html) (windows tests only)
 
 ### Testing with Docker
