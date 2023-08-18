@@ -11,7 +11,7 @@ jobs:
     name: ${{ matrix.image }} vagrant ${{ matrix.vagrant_version }}
     runs-on: ubuntu-22.04
     env:
-      docker_namepsace: ghcr.io/diodonfrost/docker-ansible
+      docker_namepsace: ghcr.io/diodonfrost
     strategy:
       fail-fast: false
       matrix:
@@ -25,9 +25,6 @@ jobs:
           - debian:11
           - amazonlinux:2
           - opensuse:leap
-          - archlinux:latest
-          - alpine:latest
-          - gentoo:latest
         vagrant_version:
           - latest
           - 2.1.0
