@@ -38,8 +38,8 @@
 
   - name: Darwin | Download Vagrant
     ansible.builtin.get_url:
-      url: "https://releases.hashicorp.com/vagrant/{{ vagrant_version_to_install }}/vagrant_{{ vagrant_version_to_install }}_x86_64.dmg"
-      dest: "./tmp/vagrant_{{ vagrant_version_to_install }}_x86_64.dmg"
+      url: "https://releases.hashicorp.com/vagrant/{{ vagrant_version_to_install }}/vagrant_{{ vagrant_version_to_install }}_darwin_amd64.dmg"
+      dest: "./tmp/vagrant_{{ vagrant_version_to_install }}_darwin_amd64.dmg"
 
   - name: Darwin | Mount dmg
     ansible.builtin.command: "hdiutil attach ./tmp/vagrant_{{ vagrant_version_to_install }}_x86_64.dmg -nobrowse -mountpoint ./tmp/vagrant-{{ vagrant_version_to_install }}"
