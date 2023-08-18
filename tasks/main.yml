@@ -2,11 +2,11 @@
 # tasks file for ansible-role-vagrant
 
 - name: Include OS specific variables.
-  include_vars: "{{ ansible_system }}.yml"
+  ansible.builtin.include_vars: "{{ ansible_system }}.yml"
 
 - name: Install Vagrant
-  include_tasks: "setup-{{ ansible_system }}.yml"
+  ansible.builtin.include_tasks: "setup-{{ ansible_system }}.yml"
 
 - name: Install Vagrant plugins
-  include_tasks: "vagrant-plugins.yml"
+  ansible.builtin.include_tasks: "vagrant-plugins.yml"
   when: vagrant_plugins | length > 0

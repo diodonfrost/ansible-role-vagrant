@@ -2,53 +2,53 @@
 # Install Vagrant on osx
 
 - name: Darwin | Find all versions of Vagrant
-  uri:
+  ansible.builtin.uri:
     url: https://releases.hashicorp.com/vagrant/index.json
-    return_content: yes
+    return_content: true
   register: vagrant_index
-  check_mode: no
+  check_mode: false
   when: vagrant_version == 'latest'
 
 - name: Darwin | Finds the latest Vagrant version when latest var is define
-  set_fact:
+  ansible.builtin.set_fact:
     vagrant_version_to_install: "{{ (vagrant_index.content | from_json).versions | list | sort_versions | last }}"
   when: vagrant_version == 'latest'
 
 - name: Linux | Use the specified Vagrant version when latest var is not define
-  set_fact:
+  ansible.builtin.set_fact:
     vagrant_version_to_install: "{{ vagrant_version }}"
   when: vagrant_version != 'latest'
 
 # This task avoids downloading Vagrant every time
 - name: Darwin | check if vagrant is present with the right version
-  command: vagrant --version
+  ansible.builtin.command: vagrant --version
   register: vagrant_installed_version
-  ignore_errors: yes
+  ignore_errors: true
   changed_when: false
   failed_when: false
 
 - name: Darwin | Install Vagrant
-  block:
+  ansible.builtin.block:
 
   - name: Darwin | Temporary directory
-    file:
+    ansible.builtin.file:
       path: ./tmp
       mode: '0755'
       state: directory
 
   - name: Darwin | Download Vagrant
-    get_url:
+    ansible.builtin.get_url:
       url: "https://releases.hashicorp.com/vagrant/{{ vagrant_version_to_install }}/vagrant_{{ vagrant_version_to_install }}_x86_64.dmg"
       dest: "./tmp/vagrant_{{ vagrant_version_to_install }}_x86_64.dmg"
 
   - name: Darwin | Mount dmg
-    command: "hdiutil attach ./tmp/vagrant_{{ vagrant_version_to_install }}_x86_64.dmg -nobrowse -mountpoint ./tmp/vagrant-{{ vagrant_version_to_install }}"
-    ignore_errors: yes
+    ansible.builtin.command: "hdiutil attach ./tmp/vagrant_{{ vagrant_version_to_install }}_x86_64.dmg -nobrowse -mountpoint ./tmp/vagrant-{{ vagrant_version_to_install }}"
+    ignore_errors: true
 
   - name: Darwin | Install Vagrant
-    command: installer -pkg ./tmp/vagrant_{{ vagrant_version_to_install }}/vagrant.pkg -target /
+    ansible.builtin.command: installer -pkg ./tmp/vagrant_{{ vagrant_version_to_install }}/vagrant.pkg -target /
 
   - name: Darwin | Unmount and remove temporary directory
-    shell: "hdiutil detach ./tmp/vagrant_{{ vagrant_version_to_install }}/ && rm -R ./tmp/"
+    ansible.builtin.shell: "hdiutil detach ./tmp/vagrant_{{ vagrant_version_to_install }}/ && rm -R ./tmp/"
 
   when: vagrant_version_to_install not in vagrant_installed_version.stdout | default('')

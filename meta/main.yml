@@ -5,20 +5,16 @@ galaxy_info:
   description: Ansible role for install the latest version of Vagrant
   license: license Apache
 
-  min_ansible_version: 2.5
+  min_ansible_version: 2.9.0
 
   platforms:
     - name: EL
       versions:
-        - 8
-        - 7
-        - 6
+        - "8"
+        - "7"
     - name: Fedora
       versions:
-        - 29
-        - 28
-        - 27
-        - 26
+        - all
     - name: Debian
       versions:
         - buster
@@ -34,38 +30,38 @@ galaxy_info:
         - precise
     - name: Amazon
       versions:
-        - 2017.12
-        - 2016.03
-        - 2013.09
+        - "2017.12"
+        - "2016.03"
+        - "2013.09"
     - name: opensuse
       versions:
-        - 15.2
-        - 15.1
-        - 15.0
-        - 42.2
-        - 42.1
+        - "15.2"
+        - "15.1"
+        - "15.0"
+        - "42.2"
+        - "42.1"
     - name: ArchLinux
       versions:
-        - any
+        - all
     - name: Alpine
       versions:
-        - any
+        - all
     - name: Gentoo
       versions:
-        - any
+        - all
     - name: ClearLinux
       versions:
-        - any
+        - all
     - name: MacOSX
       versions:
-        - 10.11
-        - 10.12
-        - 10.13
+        - "10.11"
+        - "10.12"
+        - "10.13"
     - name: Windows
       versions:
-        - 2016
-        - 2012R2
-        - 2008R2
+        - "2016"
+        - "2012R2"
+        - "2008R2"
 
   galaxy_tags:
     - system

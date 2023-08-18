@@ -3,21 +3,21 @@
   hosts: all
   tasks:
     - name: Windows | Get vagrant version used in Molecule
-      set_fact:
+      ansible.builtin.set_fact:
         molecule_vagrant_version: "{{ lookup('env', 'vagrant_version') | default('latest', true) }}"
 
     - name: Windows | Vagrant should be functionnal
-      win_command: vagrant --version
+      ansible.windows.win_command: vagrant --version
       register: vagrant_result
 
     - name: Windows | Verify vagrant is functionnal
-      assert:
+      ansible.builtin.assert:
         that:
           - vagrant_result.rc == 0
         success_msg: "All tests passed"
 
     - name: Windows | Verify the vagrant version installed
-      assert:
+      ansible.builtin.assert:
         that:
           - molecule_vagrant_version in vagrant_result.stdout
         success_msg: "All tests passed"
