@@ -11,12 +11,12 @@
 
 - name: Darwin | Finds the latest Vagrant version when latest var is define
   ansible.builtin.set_fact:
-    vagrant_version_to_install: "{{ (vagrant_index.content | from_json).versions | list | sort_versions | last }}"
+    __vagrant_version: "{{ (vagrant_index.content | from_json).versions | list | sort_versions | last }}"
   when: vagrant_version == 'latest'
 
 - name: Linux | Use the specified Vagrant version when latest var is not define
   ansible.builtin.set_fact:
-    vagrant_version_to_install: "{{ vagrant_version }}"
+    __vagrant_version: "{{ vagrant_version }}"
   when: vagrant_version != 'latest'
 
 # This task avoids downloading Vagrant every time
@@ -38,17 +38,17 @@
 
   - name: Darwin | Download Vagrant
     ansible.builtin.get_url:
-      url: "https://releases.hashicorp.com/vagrant/{{ vagrant_version_to_install }}/vagrant_{{ vagrant_version_to_install }}_darwin_amd64.dmg"
-      dest: "./tmp/vagrant_{{ vagrant_version_to_install }}_darwin_amd64.dmg"
+      url: "{{ vagrant_pkg_url }}"
+      dest: "./tmp/vagrant_{{ __vagrant_version }}_darwin_amd64.dmg"
 
   - name: Darwin | Mount dmg
-    ansible.builtin.command: "hdiutil attach ./tmp/vagrant_{{ vagrant_version_to_install }}_x86_64.dmg -nobrowse -mountpoint ./tmp/vagrant-{{ vagrant_version_to_install }}"
+    ansible.builtin.command: "hdiutil attach ./tmp/vagrant_{{ __vagrant_version }}_x86_64.dmg -nobrowse -mountpoint ./tmp/vagrant-{{ __vagrant_version }}"
     ignore_errors: true
 
   - name: Darwin | Install Vagrant
-    ansible.builtin.command: installer -pkg ./tmp/vagrant_{{ vagrant_version_to_install }}/vagrant.pkg -target /
+    ansible.builtin.command: installer -pkg ./tmp/vagrant_{{ __vagrant_version }}/vagrant.pkg -target /
 
   - name: Darwin | Unmount and remove temporary directory
-    ansible.builtin.shell: "hdiutil detach ./tmp/vagrant_{{ vagrant_version_to_install }}/ && rm -R ./tmp/"
+    ansible.builtin.shell: "hdiutil detach ./tmp/vagrant_{{ __vagrant_version }}/ && rm -R ./tmp/"
 
-  when: vagrant_version_to_install not in vagrant_installed_version.stdout | default('')
+  when: __vagrant_version not in vagrant_installed_version.stdout | default('')

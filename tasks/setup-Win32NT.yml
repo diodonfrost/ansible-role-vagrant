@@ -11,17 +11,17 @@
 
 - name: Windows | Finds the latest version of Vagrant when latest var is define
   ansible.builtin.set_fact:
-    vagrant_version_to_install: "{{ (vagrant_index.content | from_json).versions | list | sort_versions | last }}"
+    __vagrant_version: "{{ (vagrant_index.content | from_json).versions | list | sort_versions | last }}"
   when: vagrant_version == 'latest'
 
 - name: Windows | Use the specified Vagrant version when latest var is not define
   ansible.builtin.set_fact:
-    vagrant_version_to_install: "{{ vagrant_version }}"
+    __vagrant_version: "{{ vagrant_version }}"
   when: vagrant_version != 'latest'
 
 - name: Windows | Install vagrant
   ansible.windows.win_package:
-    path: https://releases.hashicorp.com/vagrant/{{ vagrant_version_to_install }}/vagrant_{{ vagrant_version_to_install }}_windows_amd64.msi
+    path: "{{ vagrant_pkg_url }}"
     product_id: Vagrant
     creates_path: C:\HashiCorp\Vagrant
     state: present

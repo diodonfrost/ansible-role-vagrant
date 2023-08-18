@@ -23,6 +23,10 @@ This role has multiple variables. The defaults for all these variables are the f
 # Default: latest
 vagrant_version: latest
 
+# Define urlwhere to download vagrant package
+# Default: use local system path defined in Ansible vars/*.yml
+vagrant_pkg_url: "{{ __vagrant_pkg_url }}"
+
 # Install Vagrant plugins
 vagrant_plugins: []
 ```

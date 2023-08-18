@@ -16,12 +16,12 @@
 
 - name: Linux | Finds the latest version of Vagrant when latest var is define
   ansible.builtin.set_fact:
-    vagrant_version_to_install: "{{ (vagrant_index.content | from_json).versions | list | sort_versions | last }}"
+    __vagrant_version: "{{ (vagrant_index.content | from_json).versions | list | sort_versions | last }}"
   when: vagrant_version == 'latest'
 
 - name: Linux | Use the specified Vagrant version when latest var is not define
   ansible.builtin.set_fact:
-    vagrant_version_to_install: "{{ vagrant_version }}"
+    __vagrant_version: "{{ vagrant_version }}"
   when: vagrant_version != 'latest'
 
 # This task avoids downloading Vagrant every time
@@ -34,8 +34,8 @@
 
 - name: Linux | Install Vagrant with Hashicorp binariy package
   ansible.builtin.unarchive:
-    src: "https://releases.hashicorp.com/vagrant/{{ vagrant_version_to_install }}/vagrant_{{ vagrant_version_to_install }}_linux_amd64.zip"
+    src: "{{ vagrant_pkg_url }}"
     dest: "{{ vagrant_path }}"
     mode: '0755'
     remote_src: true
-  when: vagrant_version_to_install not in vagrant_installed_version.stdout | default('')
+  when: __vagrant_version not in vagrant_installed_version.stdout | default('')

@@ -1,5 +1,7 @@
 ---
 # vars file for Vagrant in Linux system
+__vagrant_pkg_url: "https://releases.hashicorp.com/vagrant/{{ __vagrant_version }}/vagrant_{{ __vagrant_version }}_linux_amd64.zip"
+
 vagrant_path: /usr/bin/
 
 pkg_fuse:
@@ -7,7 +9,7 @@ pkg_fuse:
     - fuse
   Archlinux:
     - fuse2
-  Debian: 
+  Debian:
     - fuse
     - libfuse2
   Gentoo:

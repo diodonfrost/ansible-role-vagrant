@@ -1,2 +1,3 @@
 ---
 # vars file for Vagrant in windows system
+__vagrant_pkg_url: "https://releases.hashicorp.com/vagrant/{{ __vagrant_version }}/vagrant_{{ __vagrant_version }}_windows_amd64.msi"
