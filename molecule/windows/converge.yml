@@ -1,10 +1,5 @@
 ---
 - name: Converge
   hosts: all
-  tasks:
-    - name: "Include ansible-role-vagrant"
-      ansible.builtin.include_role:
-        name: "ansible-role-vagrant"
-      vars:
-        vagrant_version: "{{ lookup('env', 'vagrant_version') | default('latest', true) }}"
-        vagrant_plugins: "{{ lookup('env', 'vagrant_plugins').split(',') | default([], true) | select() }}"
+  roles:
+    - role: diodonfrost.vagrant

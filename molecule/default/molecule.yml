@@ -1,16 +1,13 @@
 ---
+dependency:
+  name: galaxy
 driver:
   name: docker
-lint: |
-  set -e
-  yamllint .
-  ansible-lint
 platforms:
   - name: linux
-    image: ${namespace:-diodonfrost}/${image:-ansible-ubuntu:22.04}
-    command: ${command:-"sleep 999"}
-    privileged: true
-    pre_build_image: yes
+    image: ${namespace:-diodonfrost}/${image:-ansible-ubuntu:24.04}
+    command: ${cmd:-"sleep 999"}
+    pre_build_image: true
 provisioner:
   name: ansible
 verifier:
