@@ -4,3 +4,4 @@
   become: true
   roles:
     - role: diodonfrost.vagrant
+      vagrant_version: "{{ lookup('env', 'vagrant_version') | default('latest', true) }}"
