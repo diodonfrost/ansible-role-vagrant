@@ -11,12 +11,12 @@
 
 - name: Windows | Finds the latest version of Vagrant when latest var is define
   ansible.builtin.set_fact:
-    __vagrant_version: "{{ (vagrant_index.content | from_json).versions | list | sort_versions | last }}"
+    _vagrant_version: "{{ (vagrant_index.content | from_json).versions | list | sort_versions | last }}"
   when: vagrant_version == 'latest'
 
 - name: Windows | Use the specified Vagrant version when latest var is not define
   ansible.builtin.set_fact:
-    __vagrant_version: "{{ vagrant_version }}"
+    _vagrant_version: "{{ vagrant_version }}"
   when: vagrant_version != 'latest'
 
 - name: Windows | Install vagrant

@@ -1,10 +1,10 @@
 ---
 # vars file for Vagrant in Linux system
-__vagrant_pkg_url: "https://releases.hashicorp.com/vagrant/{{ __vagrant_version }}/vagrant_{{ __vagrant_version }}_linux_amd64.zip"
+_vagrant_pkg_url: "https://releases.hashicorp.com/vagrant/{{ _vagrant_version }}/vagrant_{{ _vagrant_version }}_linux_amd64.zip"
 
-vagrant_path: /usr/bin/
+_vagrant_path: /usr/bin/
 
-pkg_fuse:
+_pkg_fuse:
   Alpine:
     - fuse
   Archlinux:

@@ -2,9 +2,9 @@
 # tasks file for install Vagrant on Linux system
 - name: Linux | Install Fuse
   ansible.builtin.package:
-    name: "{{ pkg_fuse[ansible_facts['os_family']] }}"
+    name: "{{ _pkg_fuse[ansible_facts['os_family']] }}"
     state: present
-  when: ansible_facts['os_family'] in pkg_fuse
+  when: ansible_facts['os_family'] in _pkg_fuse
 
 - name: Linux | Find all versions of Vagrant
   ansible.builtin.uri:
@@ -16,12 +16,12 @@
 
 - name: Linux | Finds the latest version of Vagrant when latest var is define
   ansible.builtin.set_fact:
-    __vagrant_version: "{{ (vagrant_index.content | from_json).versions | list | sort_versions | last }}"
+    _vagrant_version: "{{ (vagrant_index.content | from_json).versions | list | sort_versions | last }}"
   when: vagrant_version == 'latest'
 
 - name: Linux | Use the specified Vagrant version when latest var is not define
   ansible.builtin.set_fact:
-    __vagrant_version: "{{ vagrant_version }}"
+    _vagrant_version: "{{ vagrant_version }}"
   when: vagrant_version != 'latest'
 
 # This task avoids downloading Vagrant every time
@@ -31,11 +31,13 @@
   ignore_errors: true
   changed_when: false
   failed_when: false
+  environment:
+    APPIMAGE_EXTRACT_AND_RUN: "1"
 
 - name: Linux | Install Vagrant with Hashicorp binariy package
   ansible.builtin.unarchive:
     src: "{{ vagrant_pkg_url }}"
-    dest: "{{ vagrant_path }}"
+    dest: "{{ _vagrant_path }}"
     mode: '0755'
     remote_src: true
-  when: __vagrant_version not in vagrant_installed_version.stdout | default('')
+  when: _vagrant_version not in vagrant_installed_version.stdout | default('')
