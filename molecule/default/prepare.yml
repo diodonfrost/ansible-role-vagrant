@@ -1,0 +1,5 @@
+---
+- name: Prepare
+  hosts: all
+  roles:
+    - role: diodonfrost.update_package_manager_cache
