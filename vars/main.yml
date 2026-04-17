@@ -1,2 +1,4 @@
 ---
 # vars file for ansible-role-vagrant
+
+_vagrant_checksum_url: "https://releases.hashicorp.com/vagrant/{{ _vagrant_version }}/vagrant_{{ _vagrant_version }}_SHA256SUMS"

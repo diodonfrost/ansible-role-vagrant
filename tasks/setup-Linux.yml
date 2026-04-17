@@ -34,9 +34,17 @@
   environment:
     APPIMAGE_EXTRACT_AND_RUN: "1"
 
+- name: Linux | Download Vagrant archive
+  ansible.builtin.get_url:
+    url: "{{ vagrant_pkg_url }}"
+    dest: "/tmp/vagrant_{{ _vagrant_version }}_linux_amd64.zip"
+    checksum: "{{ ('sha256:' + vagrant_checksum_url) if vagrant_checksum_verify else omit }}"
+    mode: '0644'
+  when: _vagrant_version not in vagrant_installed_version.stdout | default('')
+
 - name: Linux | Install Vagrant with Hashicorp binariy package
   ansible.builtin.unarchive:
-    src: "{{ vagrant_pkg_url }}"
+    src: "/tmp/vagrant_{{ _vagrant_version }}_linux_amd64.zip"
     dest: "{{ _vagrant_path }}"
     mode: '0755'
     remote_src: true

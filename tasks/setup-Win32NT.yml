@@ -19,9 +19,16 @@
     _vagrant_version: "{{ vagrant_version }}"
   when: vagrant_version != 'latest'
 
+- name: Windows | Download vagrant
+  ansible.windows.win_get_url:
+    url: "{{ vagrant_pkg_url }}"
+    dest: '%TEMP%\vagrant_{{ _vagrant_version }}_windows_amd64.msi'
+    checksum_url: "{{ vagrant_checksum_url if vagrant_checksum_verify else omit }}"
+    checksum_algorithm: "{{ 'sha256' if vagrant_checksum_verify else omit }}"
+
 - name: Windows | Install vagrant
   ansible.windows.win_package:
-    path: "{{ vagrant_pkg_url }}"
+    path: '%TEMP%\vagrant_{{ _vagrant_version }}_windows_amd64.msi'
     product_id: Vagrant
     creates_path: C:\HashiCorp\Vagrant
     state: present

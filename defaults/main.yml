@@ -12,3 +12,11 @@ vagrant_pkg_url: "{{ _vagrant_pkg_url }}"
 
 # Install Vagrant plugins
 vagrant_plugins: []
+
+# Enable SHA256 checksum verification of the downloaded archive
+# Default: true
+vagrant_checksum_verify: true
+
+# Define the URL of the SHA256SUMS file used to verify the downloaded archive
+# Default: use the URL defined in Ansible vars/main.yml
+vagrant_checksum_url: "{{ _vagrant_checksum_url }}"

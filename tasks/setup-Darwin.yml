@@ -40,6 +40,7 @@
     ansible.builtin.get_url:
       url: "{{ vagrant_pkg_url }}"
       dest: "./tmp/vagrant_{{ _vagrant_version }}_darwin_amd64.dmg"
+      checksum: "{{ ('sha256:' + vagrant_checksum_url) if vagrant_checksum_verify else omit }}"
 
   - name: Darwin | Mount dmg
     ansible.builtin.command: "hdiutil attach ./tmp/vagrant_{{ _vagrant_version }}_x86_64.dmg -nobrowse -mountpoint ./tmp/vagrant-{{ _vagrant_version }}"
