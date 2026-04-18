@@ -25,6 +25,7 @@
     dest: '%TEMP%\vagrant_{{ _vagrant_version }}_windows_amd64.msi'
     checksum_url: "{{ vagrant_checksum_url if vagrant_checksum_verify else omit }}"
     checksum_algorithm: "{{ 'sha256' if vagrant_checksum_verify else omit }}"
+  check_mode: false
 
 - name: Windows | Install vagrant
   ansible.windows.win_package:

@@ -40,6 +40,7 @@
     dest: "/tmp/vagrant_{{ _vagrant_version }}_linux_amd64.zip"
     checksum: "{{ ('sha256:' + vagrant_checksum_url) if vagrant_checksum_verify else omit }}"
     mode: '0644'
+  check_mode: false
   when: _vagrant_version not in vagrant_installed_version.stdout | default('')
 
 - name: Linux | Install Vagrant with Hashicorp binariy package
